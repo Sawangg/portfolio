@@ -1,0 +1,35 @@
+---
+const { title, description } = Astro.props;
+---
+
+<html lang="en" class="antialiased">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="light dark" name="color-scheme" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta
+      name="description"
+      property="og:description"
+      content={description ?? "The 2025 portfolio of Léo Mercier."}
+    />
+    <meta name="author" content="Léo Mercier" />
+    <meta name="copyright" content="ISC" />
+
+    <link rel="canonical" href={Astro.url} />
+    <meta content="origin" name="referrer" />
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+    <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" />
+
+    <meta property="og:site_name" content="Léo Mercier's portfolio" />
+    <meta property="og:title" content={title ?? "Léo Mercier's portfolio"} />
+    <meta property="og:type" content="website" />
+
+    <title>{title ?? "Léo Mercier's porfolio"}</title>
+  </head>
+  <body class="min-h-screen overflow-x-hidden selection:bg-sky-500 selection:text-white">
+    <slot />
+  </body>
+</html>
