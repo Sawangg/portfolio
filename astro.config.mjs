@@ -1,5 +1,5 @@
 // @ts-check
-import cloudflare from "@astrojs/cloudflare";
+import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import playformCompress from "@playform/compress";
@@ -8,7 +8,6 @@ import { defineConfig } from "astro/config";
 
 export default defineConfig({
   site: "https://leomercier.dev",
-  //adapter: cloudflare(),
   image: {
     remotePatterns: [
       {
@@ -18,6 +17,7 @@ export default defineConfig({
   },
   prefetch: true,
   integrations: [
+    react(),
     tailwind({
       applyBaseStyles: true,
     }),

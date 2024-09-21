@@ -1,0 +1,11 @@
+---
+const props = Astro.props;
+---
+
+<article class={`p-8 w-full rounded-[2rem] ${props.class}`}>
+  <h3 class="font-bold text-xl">{props.company}</h3>
+  <p class="mb-2 text-md"><time datetime="2022-01-01T00:00:00">{props.date[0]}</time>{props.date[1] && " - "} {props.date[1]}</p>
+  <hr class="mb-4 rounded border border-zinc-950/10" />
+  <h4 class="mb-2 font-semibold">{props.title}</h4>
+  <p class="font-normal">{props.description}</p>
+</article>

@@ -2,8 +2,18 @@
 const { title, description } = Astro.props;
 ---
 
-<html lang="en" class="antialiased">
+<html lang="en">
   <head>
+    <style>
+      /* Critical */
+      @font-face {
+        font-family: "Aktiv Grotesk";
+        font-weight: 100 800;
+        src: url("/fonts/AktivGroteskVF.woff2") format("woff2-variations");
+        src: url("/fonts/AktivGroteskVF.woff2") format("woff2") tech("variations");
+      }
+    </style>
+
     <meta charset="UTF-8" />
     <meta content="light dark" name="color-scheme" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -27,9 +37,9 @@ const { title, description } = Astro.props;
     <meta property="og:title" content={title ?? "Léo Mercier's portfolio"} />
     <meta property="og:type" content="website" />
 
-    <title>{title ?? "Léo Mercier's porfolio"}</title>
+    <title>{title ?? "Léo Mercier — 2024"}</title>
   </head>
-  <body class="min-h-screen overflow-x-hidden selection:bg-sky-500 selection:text-white">
+  <body class="antialiased bg-black overflow-x-hidden selection:bg-sky-500 selection:text-white">
     <slot />
   </body>
 </html>
