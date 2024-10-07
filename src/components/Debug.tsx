@@ -10,7 +10,7 @@ export const Debug = () => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollProgress = scrollTop / scrollHeight * 100;
+      const scrollProgress = (scrollTop / scrollHeight) * 100;
       setScrollY(Math.floor(scrollTop));
       setScrollYProgress(Math.floor(scrollProgress));
     };

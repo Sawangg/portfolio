@@ -30,7 +30,8 @@
     "@playform/compress": "^0.1.1",
     "@types/bun": "^1.1.9",
     "@types/three": "^0.168.0",
-    "astro-robots-txt": "^1.0.0"
+    "astro-robots-txt": "^1.0.0",
+    "wrangler": "^3.78.12"
   },
   "peerDependencies": {
     "typescript": "^5.6.2"
