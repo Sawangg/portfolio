@@ -41,11 +41,11 @@ export const Menu: React.FC<MenuProps> = ({ iconHsl, className, children }) => {
   const toggleOpen = () => {
     if (!open) {
       // Animate the children (supposed to be <li> tags)
-      animate("li", { opacity: 1, rotateX: 0 }, { delay: stagger(0.2, { startDelay: 0.5 }) });
+      animate("li", { opacity: 1 }, { delay: stagger(0.2, { startDelay: 0.5 }) });
       lockScroll();
     } else {
       unlockScroll();
-      animate("li", { opacity: 0, rotateX: 90 }, { delay: stagger(0.2) });
+      animate("li", { opacity: 0 }, { delay: stagger(0.2) });
     }
     setOpen(!open); // Starts the menu animation
   };

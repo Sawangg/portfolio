@@ -1,63 +1,54 @@
 ---
 import BaseLayout from "@components/BaseLayout.astro";
 import Card from "@components/Card.astro";
-import { Debug } from "@components/Debug";
+//import { Debug } from "@components/Debug";
 import Navbar from "@components/Navbar/Navbar.astro";
-import { ChallengesSection } from "@components/Sections/ChallengesSection.tsx";
+//import { ChallengesSection } from "@components/Sections/ChallengesSection.tsx";
 import Section from "@components/Sections/Section.astro";
 import { Section1 } from "@components/Sections/Section1";
-import { Section2 } from "@components/Sections/Section2";
+//import { Section2 } from "@components/Sections/Section2";
 import { Title } from "@components/Title";
 ---
 
 <BaseLayout>
   <Navbar />
-  <Debug client:load />
   <main>
     <section class="flex flex-col items-center">
-      <Title client:load />
+      <Title client:only="react" />
     </section>
     <Section class="h-[230vh]">
-      <Section1 client:visible />
-    </Section>
-    <Section class="h-[200vh]">
-      <Section2 client:visible />
-    </Section>
-    <Section class="h-[400vh]">
-      <ChallengesSection client:visible />
-    </Section>
-    <Section class="h-screen">
-      
+      <Section1 client:idle />
     </Section>
     <section id="work" class="pt-[10vh] px-5 bg-zinc-200 text-black">
       <h2 class="mb-12 font-semibold text-2xl text-center">Recent work & experiments</h2>
       <div class="flex flex-col grid-cols-2 gap-10 md:grid md:max-w-3xl md:mx-auto">
         <Card
+          class="bg-white col-span-2"
           company="BPCE"
           date={["2022", "Present"]}
-          title="Senior Frontend Developer"
+          title="Software Engineer"
           description="Lorem"
-          class="bg-white col-span-2"
         />
         <Card
+          class="bg-purple-400/25"
           company="Natixis"
           date={["2019", "2021"]}
-          title="Senior Frontend Developer"
+          title="Junior Software Engineer"
           description="Lorem"
-          class="bg-purple-400/25"
         />
         <Card
+          class="bg-red-400/25"
           company="Adventur'IT"
           date={["2024"]}
-          title="Senior Frontend Developer"
-          description="Lorem"
-          class="bg-red-400/25"
+          description="I led a team of four engineers at Société Générale to design and develop a coding game aimed at screening and recruiting new engineers for the company."
+          link="https://github.com/Sawangg/adventurit"
         />
 
       </div>
     </section>
   </main>
-  <footer class="py-32 bg-zinc-200 text-black">
-    <p>© Léo Mercier</p>
+  <footer class="pt-10 pb-2 px-4 bg-zinc-200 text-zinc-500">
+    <hr class="mb-3 rounded border border-zinc-950/10" />
+    <p class="text-sm uppercase">© Léo Mercier</p>
   </footer>
 </BaseLayout>
