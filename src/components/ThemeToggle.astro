@@ -1,0 +1,22 @@
+---
+import Moon from "@assets/moon.svg";
+import Sun from "@assets/sun.svg";
+---
+
+<theme-toggle class="cursor-pointer focus:ring-1">
+  <Moon title="Switch to light mode" class="size-5 hidden dark:block" />
+  <Sun title="Switch to dark mode" class="size-5 dark:hidden" />
+</theme-toggle>
+
+<script>
+  customElements.define(
+    "theme-toggle",
+    class extends HTMLElement {
+      connectedCallback() {
+        this.addEventListener("click", () => {
+          window.theme.getTheme() === "dark" ? window.theme.setTheme("light") : window.theme.setTheme("dark");
+        });
+      }
+    }
+  );
+</script>

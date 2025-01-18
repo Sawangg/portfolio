@@ -1,21 +1,14 @@
 ---
+import Footer from "@components/Footer.astro";
+import Header from "@components/Header.astro";
+import ThemeManager from "@components/ThemeManager.astro";
+
 const { title, description } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
-    <style>
-      /* Critical */
-      @font-face {
-        font-family: "Aktiv Grotesk";
-        font-weight: 100 800;
-        src: url("/fonts/AktivGroteskVF.woff2") format("woff2-variations");
-        src: url("/fonts/AktivGroteskVF.woff2") format("woff2") tech("variations");
-      }
-    </style>
-
     <meta charset="UTF-8" />
-    <meta content="light dark" name="color-scheme" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <meta
@@ -24,12 +17,46 @@ const { title, description } = Astro.props;
       content={description ?? "The 2025 portfolio of Léo Mercier."}
     />
     <meta name="author" content="Léo Mercier" />
-    <meta name="copyright" content="ISC" />
+    <meta name="copyright" content="CC BY-NC-SA" />
 
     <link rel="canonical" href={Astro.url} />
     <meta content="origin" name="referrer" />
 
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="preconnect" href="/" />
+    <link rel="preload" href="/fonts/aktivgrotesk.woff2" as="font" type="font/woff2" crossorigin />
+
+    <style is:inline>
+      /* This prevents FOUT by preloading and importing fonts as soon as possible */
+      @font-face {
+        font-family: "Aktiv Grotesk";
+        font-weight: 100 800;
+        font-display: swap;
+        font-optical-sizing: auto;
+        src: url("/fonts/aktivgrotesk.woff2") format("woff2-variations");
+        src: url("/fonts/aktivgrotesk.woff2") format("woff2") tech("variations");
+      }
+
+      @font-face {
+        font-family: "Fira Code";
+        font-style: normal;
+        font-weight: 300 700;
+        font-display: swap;
+        font-optical-sizing: auto;
+        src: url("/fonts/firacode.woff2") format("woff2-variations");
+        src: url("/fonts/firacode.woff2") format("woff2") tech("variations");
+      }
+    </style>
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Léo Mercier's blog" />
+
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fafafa" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="black" />
+
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
     <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" />
 
@@ -37,9 +64,27 @@ const { title, description } = Astro.props;
     <meta property="og:title" content={title ?? "Léo Mercier's portfolio"} />
     <meta property="og:type" content="website" />
 
+    <link rel="alternate" type="application/rss+xml" title="Léo Mercier's blog" href={`${Astro.site}rss.xml`} />
+
     <title>{title ?? "Léo Mercier — 2024"}</title>
+
+    <ThemeManager />
   </head>
-  <body class="antialiased bg-black text-white overflow-x-hidden selection:bg-sky-500 selection:text-white">
+  <body class="scheme-light antialiased min-h-screen overflow-x-hidden font-sans bg-white text-zinc-500 transition-colors ease-in-out duration-300 **:outline-none **:focus:ring-2 **:focus:ring-sky-500 selection:bg-sky-500 selection:text-white dark:bg-black dark:text-[#bbb] dark:scheme-dark">
+    <Header />
     <slot />
+    <Footer />
   </body>
 </html>
+
+<style is:global>
+  @import "tailwindcss";
+
+  @variant dark (&:is([data-theme="dark"] *));
+
+  @theme {
+    --font-sans: "Aktiv Grotesk", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+</style>
+

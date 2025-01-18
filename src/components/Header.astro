@@ -1,0 +1,25 @@
+---
+import Github from "@assets/github.svg";
+import Rss from "@assets/rss.svg";
+import Signature from "@assets/signature.svg";
+import ThemeToggle from "@components/ThemeToggle.astro";
+---
+
+<header class="w-full flex-none py-6 px-4 sm:px-8 ">
+  <nav class="flex items-center justify-between">
+    <a href="/">
+      <Signature class="h-9 text-black dark:text-white" title="Home" />
+    </a>
+    <div class="flex items-center gap-x-3 *:hover:text-black *:dark:hover:text-white md:gap-x-6">
+      <a href="https://leomercier.blog/" target="_blank">Blog</a>
+      <a href="/projects">Projects</a>
+      <a href="https://github.com/Sawangg/" target="_blank">
+        <Github class="size-5" title="Github" />
+      </a>
+      <a href="https://leomercier.blog/rss.xml/" target="_blank">
+        <Rss class="size-5" title="RSS" />
+      </a>
+      <ThemeToggle />
+    </div>
+  </nav>
+</header>
