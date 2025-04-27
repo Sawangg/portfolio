@@ -24,6 +24,6 @@
     "@playform/compress": "^0.1.9",
     "astro-robots-txt": "^1.0.0",
     "typescript": "^5.8.3",
-    "wrangler": "^4.13.1"
+    "wrangler": "^4.13.2"
   }
 }
