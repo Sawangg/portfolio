@@ -10,22 +10,22 @@ import ThemeToggle from "@components/ThemeToggle.astro";
 <header class="w-full flex-none py-6 px-4 sm:px-8 ">
   <nav class="flex items-center justify-between">
     <a href="/" class="focus:ring-1">
-      <Signature class="h-9 text-black dark:text-white" title="Home" />
+      <Signature class="h-9 text-black dark:text-white" />
     </a>
     <div class="flex items-center gap-x-4 *:hover:text-black *:dark:hover:text-white md:gap-x-6">
       <a href="https://blog.leomercier.dev/" target="_blank">
         <span class="hidden md:block">Blog</span>
-        <List class="size-5 md:hidden" title="Blog" />
+        <List class="size-5 md:hidden" />
       </a>
       <a href="/projects">
         <span class="hidden md:block">Projects</span>
-        <Bulb class="size-5 md:hidden" title="Projects" />
+        <Bulb class="size-5 md:hidden" />
       </a>
       <a href="https://github.com/Sawangg/" target="_blank">
-        <Github class="size-5" title="Github" />
+        <Github class="size-5" />
       </a>
       <a href="https://blog.leomercier.dev/rss.xml/" target="_blank">
-        <Rss class="size-5" title="RSS" />
+        <Rss class="size-5"/>
       </a>
       <ThemeToggle />
     </div>
