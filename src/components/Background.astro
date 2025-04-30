@@ -70,7 +70,7 @@
   const canvas = document.getElementById("dots") as HTMLCanvasElement;
   const ctx = canvas.getContext("2d");
 
-  const points: { x: number; y: number; opacity: number }[] = [];
+  const points: { x: number; y: number; }[] = [];
   const SCALE = 200;
   const LENGTH = 24;
   const SPACING = 15;
@@ -87,7 +87,7 @@
     points.length = 0;
     for (let x = 0; x < window.innerWidth + SPACING; x += SPACING) {
       for (let y = 0; y < window.innerHeight + SPACING; y += SPACING) {
-        points.push({ x, y, opacity: Math.random() * 0.5 + 0.5 });
+        points.push({ x, y });
       }
     }
   }
@@ -104,7 +104,7 @@
       const ny = p.y + Math.sin(rad) * length;
       const alpha = Math.abs(Math.cos(rad)) * 0.5 + 0.5;
       ctx.beginPath();
-      ctx.fillStyle = `rgba(120, 120, 120, ${alpha * p.opacity})`;
+      ctx.fillStyle = window.theme.getTheme() === "dark" ? `rgba(120, 120, 120, ${alpha})` : `rgba(180, 180, 180, ${alpha})`;
       ctx.arc(nx, ny, 1, 0, 2 * Math.PI);
       ctx.fill();
     }
