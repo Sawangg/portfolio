@@ -4,7 +4,7 @@ import BaseLayout from "@components/BaseLayout.astro";
 
 <BaseLayout>
   <main class="flex flex-col px-4 gap-y-5 mt-10 mx-auto max-w-2xl text-[1.1rem]/7 md:px-0">
-    <h1 class="mb-3 font-semibold text-black dark:text-white text-4xl ">Léo Mercier</h1>
+    <h1 class="mb-3 font-semibold text-black dark:text-white text-4xl">Léo Mercier</h1>
     <p>
       Hey, I'm Léo Mercier, a
       <span class="bg-linear-to-r from-purple-400 to-red-500 bg-clip-text text-transparent">creative</span>
@@ -24,8 +24,38 @@ import BaseLayout from "@components/BaseLayout.astro";
       posts about open-source, finance, privacy and more. Occasionally, I also do some coding live streams on Twitch.</p>
     <p>Outside of programming, I enjoy fitness and reading a good book. Right now I live in the City of Lights, Paris 🇫🇷. If you are around, feel free to reach out, we could have a chat or work together.</p>
     <hr class="my-2 w-1/3 self-center text-black/20 dark:text-white/30" />
-    <p>Find me on <span>Github</span> or email me <span class="font-mono text-base">hi@leomercier.dev</span></p>
+    <p>Find me on <span>GitHub</span> or email me <span class="font-mono text-base">hi@leomercier.dev</span></p>
     <hr class="my-2 w-1/3 self-center text-black/20 dark:text-white/30" />
     <p>If you ever found my content useful, feel free to donate to help me deliver more content. Thank you!</p>
   </main>
 </BaseLayout>
+
+<style>
+  main > *:not(h1) {
+    --stagger-delay: 100ms;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: slide-in 500ms forwards;
+    animation-delay: calc(var(--stagger-delay) * (var(--enter-index, 0)));
+  }
+
+  main > *:nth-child(2)  { --enter-index: 0; }
+  main > *:nth-child(3)  { --enter-index: 1; }
+  main > *:nth-child(4)  { --enter-index: 2; }
+  main > *:nth-child(5)  { --enter-index: 3; }
+  main > *:nth-child(6)  { --enter-index: 4; }
+  main > *:nth-child(7)  { --enter-index: 5; }
+  main > *:nth-child(8)  { --enter-index: 6; }
+  main > *:nth-child(9)  { --enter-index: 7; }
+  main > *:nth-child(10) { --enter-index: 8; }
+
+  @keyframes slide-in {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>
+
+
+
