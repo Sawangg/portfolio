@@ -31,23 +31,25 @@ import BaseLayout from "@components/BaseLayout.astro";
 </BaseLayout>
 
 <style>
-  main > *:not(h1) {
-    --stagger-delay: 100ms;
-    opacity: 0;
-    transform: translateY(12px);
-    animation: slide-in 500ms forwards;
-    animation-delay: calc(var(--stagger-delay) * (var(--enter-index, 0)));
-  }
+  @media (prefers-reduced-motion: no-preference) {
+    main > *:not(h1) {
+      --stagger-delay: 100ms;
+      opacity: 0;
+      transform: translateY(12px);
+      animation: slide-in 500ms forwards;
+      animation-delay: calc(var(--stagger-delay) * (var(--enter-index, 0)));
+    }
 
-  main > *:nth-child(2)  { --enter-index: 0; }
-  main > *:nth-child(3)  { --enter-index: 1; }
-  main > *:nth-child(4)  { --enter-index: 2; }
-  main > *:nth-child(5)  { --enter-index: 3; }
-  main > *:nth-child(6)  { --enter-index: 4; }
-  main > *:nth-child(7)  { --enter-index: 5; }
-  main > *:nth-child(8)  { --enter-index: 6; }
-  main > *:nth-child(9)  { --enter-index: 7; }
-  main > *:nth-child(10) { --enter-index: 8; }
+    main > *:nth-child(2)  { --enter-index: 0; }
+    main > *:nth-child(3)  { --enter-index: 1; }
+    main > *:nth-child(4)  { --enter-index: 2; }
+    main > *:nth-child(5)  { --enter-index: 3; }
+    main > *:nth-child(6)  { --enter-index: 4; }
+    main > *:nth-child(7)  { --enter-index: 5; }
+    main > *:nth-child(8)  { --enter-index: 6; }
+    main > *:nth-child(9)  { --enter-index: 7; }
+    main > *:nth-child(10) { --enter-index: 8; }
+  }
 
   @keyframes slide-in {
     to {
