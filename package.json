@@ -12,10 +12,10 @@
     "check:fix": "biome check --fix --unsafe && astro check"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^12.5.1",
-    "@tailwindcss/vite": "^4.1.4",
-    "astro": "^5.7.9",
-    "tailwindcss": "^4.1.4"
+    "@astrojs/cloudflare": "^12.5.2",
+    "@tailwindcss/vite": "^4.1.5",
+    "astro": "^5.7.10",
+    "tailwindcss": "^4.1.5"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
@@ -24,6 +24,6 @@
     "@playform/compress": "^0.1.9",
     "astro-robots-txt": "^1.0.0",
     "typescript": "^5.8.3",
-    "wrangler": "^4.14.0"
+    "wrangler": "^4.14.1"
   }
 }
