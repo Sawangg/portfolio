@@ -1,0 +1,35 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.1.0/schema.json",
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+        // "useSortedKeys": "on"
+      }
+    }
+  },
+  "linter": {
+    "rules": {
+      "recommended": true
+      // "nursery": {
+      //   "useSortedClasses": {
+      //     "level": "warn",
+      //     "options": {
+      //       "functions": ["cn"]
+      //     }
+      //   }
+      // }
+    }
+  },
+  "formatter": {
+    "formatWithErrors": false,
+    "attributePosition": "auto",
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 120
+  },
+  "files": {
+    "includes": ["**", "!**/dist/**", "!**/*.astro"]
+  }
+}

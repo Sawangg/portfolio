@@ -2,8 +2,8 @@ import cloudflare from "@astrojs/cloudflare";
 import sitemap from "@astrojs/sitemap";
 import playformCompress from "@playform/compress";
 import tailwindcss from "@tailwindcss/vite";
-import robotsTxt from "astro-robots-txt";
 import { defineConfig, fontProviders, passthroughImageService } from "astro/config";
+import robotsTxt from "astro-robots-txt";
 
 export default defineConfig({
   site: "https://leomercier.dev",
