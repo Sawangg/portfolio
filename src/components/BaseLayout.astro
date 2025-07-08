@@ -1,4 +1,5 @@
 ---
+import { Font } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
 import Footer from "@components/Footer.astro";
 import Header from "@components/Header.astro";
@@ -7,7 +8,7 @@ import ThemeManager from "@components/ThemeManager.astro";
 const { title, description } = Astro.props;
 ---
 
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="auto">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -24,29 +25,9 @@ const { title, description } = Astro.props;
     <meta content="origin" name="referrer" />
 
     <link rel="preconnect" href="/" />
-    <link rel="preload" href="/fonts/aktivgrotesk.woff2" as="font" type="font/woff2" crossorigin />
 
-    <style is:inline>
-      /* This prevents FOUT by preloading and importing fonts as soon as possible */
-      @font-face {
-        font-family: "Aktiv Grotesk";
-        font-weight: 100 800;
-        font-display: swap;
-        font-optical-sizing: auto;
-        src: url("/fonts/aktivgrotesk.woff2") format("woff2-variations");
-        src: url("/fonts/aktivgrotesk.woff2") format("woff2") tech("variations");
-      }
-
-      @font-face {
-        font-family: "Fira Code";
-        font-style: normal;
-        font-weight: 300 700;
-        font-display: swap;
-        font-optical-sizing: auto;
-        src: url("/fonts/firacode.woff2") format("woff2-variations");
-        src: url("/fonts/firacode.woff2") format("woff2") tech("variations");
-      }
-    </style>
+    <Font cssVariable="--font-aktiv-grotesk" preload />
+    <Font cssVariable="--font-fira-code" preload />
 
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -55,7 +36,7 @@ const { title, description } = Astro.props;
     <meta name="apple-mobile-web-app-title" content="Léo Mercier's portfolio" />
 
     <meta name="color-scheme" content="light dark">
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fafafa" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="white" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="black" />
 
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
@@ -84,9 +65,9 @@ const { title, description } = Astro.props;
 
   @variant dark (&:is([data-theme="dark"] *));
 
-  @theme {
-    --font-sans: "Aktiv Grotesk", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    --font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  @theme inline {
+    --font-sans: var(--font-aktiv-grotesk);
+    --font-mono: var(--font-fira-code);
   }
 </style>
 
