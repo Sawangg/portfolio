@@ -29,6 +29,7 @@ export default defineConfig({
     ],
   },
   experimental: {
+    rawEnvValues: true,
     clientPrerender: true,
     preserveScriptOrder: true,
     fonts: [
