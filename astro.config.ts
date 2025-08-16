@@ -29,7 +29,7 @@ export default defineConfig({
     ],
   },
   experimental: {
-    rawEnvValues: true,
+    staticImportMetaEnv: true,
     clientPrerender: true,
     preserveScriptOrder: true,
     fonts: [
