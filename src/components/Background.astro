@@ -104,7 +104,7 @@
       const ny = p.y + Math.sin(rad) * length;
       const alpha = Math.abs(Math.cos(rad)) * 0.5 + 0.5;
       ctx.beginPath();
-      ctx.fillStyle = window.theme.getTheme() === "dark" ? `rgba(120, 120, 120, ${alpha})` : `rgba(180, 180, 180, ${alpha})`;
+      ctx.fillStyle = window.theme.getTheme() === "dark" ? `rgba(80, 80, 80, ${alpha})` : `rgba(200, 200, 200, ${alpha})`;
       ctx.arc(nx, ny, 1, 0, 2 * Math.PI);
       ctx.fill();
     }
