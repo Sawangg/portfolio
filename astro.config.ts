@@ -11,7 +11,6 @@ export default defineConfig({
     enabled: false,
   },
   experimental: {
-    staticImportMetaEnv: true,
     clientPrerender: true,
     fonts: [
       {
@@ -52,6 +51,7 @@ export default defineConfig({
       },
     ],
     preserveScriptOrder: true,
+    staticImportMetaEnv: true,
   },
   image: {
     remotePatterns: [
