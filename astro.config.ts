@@ -6,36 +6,15 @@ import { defineConfig, fontProviders, passthroughImageService } from "astro/conf
 import robotsTxt from "astro-robots-txt";
 
 export default defineConfig({
-  site: "https://leomercier.dev",
-  output: "server",
   adapter: cloudflare(),
-  integrations: [playformCompress(), robotsTxt(), sitemap()],
-  vite: {
-    plugins: [tailwindcss()],
-  },
   devToolbar: {
     enabled: false,
-  },
-  prefetch: {
-    prefetchAll: true,
-    defaultStrategy: "viewport",
-  },
-  image: {
-    service: passthroughImageService(),
-    remotePatterns: [
-      {
-        protocol: "https",
-      },
-    ],
   },
   experimental: {
     staticImportMetaEnv: true,
     clientPrerender: true,
-    preserveScriptOrder: true,
     fonts: [
       {
-        provider: "local",
-        name: "Aktiv Grotesk",
         cssVariable: "--font-aktiv-grotesk",
         fallbacks: [
           "ui-sans-serif",
@@ -46,17 +25,17 @@ export default defineConfig({
           "Segoe UI Symbol",
           "Noto Color Emoji",
         ],
+        name: "Aktiv Grotesk",
+        provider: "local",
         variants: [
           {
-            weight: "100 800",
-            style: "normal",
             src: ["./src/assets/fonts/aktivgrotesk.woff2"],
+            style: "normal",
+            weight: "100 800",
           },
         ],
       },
       {
-        provider: fontProviders.google(),
-        name: "Fira Code",
         cssVariable: "--font-fira-code",
         fallbacks: [
           "ui-monospace",
@@ -68,7 +47,28 @@ export default defineConfig({
           "Courier New",
           "monospace",
         ],
+        name: "Fira Code",
+        provider: fontProviders.google(),
       },
     ],
+    preserveScriptOrder: true,
+  },
+  image: {
+    remotePatterns: [
+      {
+        protocol: "https",
+      },
+    ],
+    service: passthroughImageService(),
+  },
+  integrations: [playformCompress(), robotsTxt(), sitemap({ namespaces: { video: false } })],
+  output: "server",
+  prefetch: {
+    defaultStrategy: "viewport",
+    prefetchAll: true,
+  },
+  site: "https://leomercier.dev",
+  vite: {
+    plugins: [tailwindcss()],
   },
 });

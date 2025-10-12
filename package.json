@@ -1,29 +1,30 @@
 {
-  "name": "portfolio",
   "author": "Sawangg",
-  "type": "module",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "astro dev",
-    "build": "biome check && astro check && astro build",
-    "deploy:staging": "biome check && astro check && astro build --mode staging && wrangler pages deploy --branch staging",
-    "deploy:prod": "biome check && astro check && astro build && wrangler pages deploy --branch master",
-    "check": "biome check && astro check",
-    "check:fix": "biome check --fix --unsafe && astro check"
-  },
   "dependencies": {
-    "@astrojs/cloudflare": "^12.6.4",
-    "@tailwindcss/vite": "^4.1.12",
-    "astro": "^5.13.2",
-    "tailwindcss": "^4.1.12"
+    "@astrojs/cloudflare": "^12.6.10",
+    "@tailwindcss/vite": "^4.1.14",
+    "astro": "^5.14.4",
+    "tailwindcss": "^4.1.14"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/sitemap": "^3.5.0",
-    "@biomejs/biome": "^2.2.0",
+    "@astrojs/sitemap": "^3.6.0",
+    "@biomejs/biome": "^2.2.5",
     "@playform/compress": "^0.2.0",
     "astro-robots-txt": "^1.0.0",
-    "typescript": "^5.9.2",
-    "wrangler": "^4.30.0"
-  }
+    "typescript": "^5.9.3",
+    "wrangler": "^4.42.2"
+  },
+  "name": "portfolio",
+  "scripts": {
+    "biome": "biome",
+    "build": "biome check && astro check && astro build",
+    "check": "biome check && astro check",
+    "check:fix": "biome check --fix --unsafe && astro check",
+    "deploy:prod": "biome check && astro check && astro build && wrangler pages deploy --branch master",
+    "deploy:staging": "biome check && astro check && astro build --mode staging && wrangler pages deploy --branch staging",
+    "dev": "astro dev"
+  },
+  "type": "module",
+  "version": "0.0.1"
 }
