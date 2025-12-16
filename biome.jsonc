@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.2.5/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.3.9/schema.json",
   "assist": {
     "actions": {
       "source": {
@@ -21,15 +21,15 @@
   },
   "linter": {
     "rules": {
+      "nursery": {
+        "useSortedClasses": {
+          "level": "warn",
+          "options": {
+            "functions": ["cn"]
+          }
+        }
+      },
       "recommended": true
-      // "nursery": {
-      //   "useSortedClasses": {
-      //     "level": "warn",
-      //     "options": {
-      //       "functions": ["cn"]
-      //     }
-      //   }
-      // }
     }
   }
 }
