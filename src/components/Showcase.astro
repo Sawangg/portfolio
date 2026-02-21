@@ -9,10 +9,10 @@
         through late nights and early mornings.
       </p>
       <p class="transition-[opacity,transform] duration-150 ease-in-out pointer-events-none opacity-0 text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-semibold text-zinc-900 leading-tight text-center px-6 absolute inset-0 flex items-center justify-center" data-chapter="2">
-        With zero surprises.
+        With zero surprises
       </p>
       <p class="transition-[opacity,transform] duration-150 ease-in-out pointer-events-none opacity-0 text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-semibold text-zinc-900 leading-tight text-center px-6 absolute inset-0 flex items-center justify-center" data-chapter="3">
-        From commit to production.
+        from commit to production.
       </p>
       <p class="transition-[opacity,transform] duration-150 ease-in-out pointer-events-none opacity-0 text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-semibold text-zinc-900 leading-tight text-center px-6 absolute inset-0 flex items-center justify-center" data-chapter="4">
         And everything in between.
@@ -42,7 +42,6 @@
 
       const { chapterIndex, chapterProgress, transitionAlpha } = scene.getChapterInfo();
 
-      // Text fades in over chapterProgress 0.15→0.35 and fades out over 0.65→0.85
       const textIn = Math.max(0, Math.min(1, (chapterProgress - 0.15) / 0.20));
       const textOut = Math.max(0, Math.min(1, (0.85 - chapterProgress) / 0.20));
       const chapterTextAlpha = easeInOut(textIn) * easeInOut(textOut);
