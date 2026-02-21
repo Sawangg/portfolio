@@ -19,15 +19,16 @@ export const renderHeartbeat: ChapterRenderer = (ctx, w, h, progress, time) => {
 
   const cx = w / 2;
   const cy = h / 2;
+  const dotX = w / 2;
+  const dotY = h * 0.08;
   const maxRadius = Math.min(w, h) * 0.42;
 
-  // Phase 1 (0.00 → 0.35): tiny dot grows to full circle
-  // Phase 2 (0.35 → 0.65): circle stays full size, content visible
-  // Phase 3 (0.65 → 1.00): circle exits (moves off-screen corner), dot shrinks back
+  // Phase 1 (0.00 → 0.15): dot at top, circle expands quickly
+  // Phase 2 (0.15 → 0.65): circle full size, content visible
+  // Phase 3 (0.65 → 1.00): circle exits to corner
 
   // --- Dot grid background ---
-  // Grid fades in as progress advances
-  const gridFade = easeOutCubic(Math.min(1, progress / 0.4));
+  const gridFade = easeOutCubic(Math.min(1, progress / 0.2));
   const gridSpacing = 28;
   const cols = Math.ceil(w / gridSpacing) + 1;
   const rows = Math.ceil(h / gridSpacing) + 1;
@@ -39,11 +40,9 @@ export const renderHeartbeat: ChapterRenderer = (ctx, w, h, progress, time) => {
       const distFromCenter = Math.sqrt((dx - cx) ** 2 + (dy - cy) ** 2);
       const normalizedDist = distFromCenter / (Math.max(w, h) * 0.7);
 
-      // Dots pulse with a radial wave driven by time
       const wave = Math.sin(normalizedDist * 10 - time * 1.6 + progress * Math.PI * 2) * 0.5 + 0.5;
 
-      // Dots inside the circle radius area are brighter
-      const circleProgress = easeInOutCubic(Math.min(1, progress / 0.35));
+      const circleProgress = easeInOutCubic(Math.min(1, progress / 0.15));
       const currentRadius = maxRadius * circleProgress;
       const insideCircle = distFromCenter < currentRadius ? 1 : 0;
 
@@ -60,27 +59,25 @@ export const renderHeartbeat: ChapterRenderer = (ctx, w, h, progress, time) => {
     }
   }
 
-  // --- Circle position: starts centered, exits bottom-right corner ---
-  let circleX = cx;
-  let circleY = cy;
+  // --- Circle: grows from top-center dot position, exits bottom-right ---
+  let circleX = dotX;
+  let circleY = dotY;
 
   const exitProgress = Math.max(0, (progress - 0.65) / 0.35);
   const exitEase = easeInOutQuart(exitProgress);
 
-  // Exit target: bottom-right corner
-  const targetX = w * 0.85;
-  const targetY = h * 0.85;
-  circleX = cx + (targetX - cx) * exitEase;
-  circleY = cy + (targetY - cy) * exitEase;
+  // Move from top-center toward canvas center as circle grows, then exit to corner
+  const settleEase = easeInOutCubic(Math.min(1, progress / 0.15));
+  circleX = dotX + (cx - dotX) * settleEase + (w * 0.85 - cx) * exitEase;
+  circleY = dotY + (cy - dotY) * settleEase + (h * 0.85 - cy) * exitEase;
 
   // --- Circle radius ---
-  const circleGrowProgress = easeInOutCubic(Math.min(1, progress / 0.35));
-  // Shrink slightly when exiting
+  const circleGrowProgress = easeInOutCubic(Math.min(1, progress / 0.15));
   const circleShrinkOnExit = 1 - exitEase * 0.15;
   const radius = maxRadius * circleGrowProgress * circleShrinkOnExit;
 
   // --- Circle alpha ---
-  const circleAlpha = easeOutCubic(Math.min(1, progress / 0.15)) * (1 - exitEase * 0.3);
+  const circleAlpha = easeOutCubic(Math.min(1, progress / 0.08)) * (1 - exitEase * 0.3);
 
   if (radius > 0.5) {
     // Outer glow ring
@@ -101,30 +98,25 @@ export const renderHeartbeat: ChapterRenderer = (ctx, w, h, progress, time) => {
     ctx.stroke();
   }
 
-  // --- Center dot (visible at start, shrinks once circle is large) ---
-  const dotFade = 1 - easeInOutCubic(Math.min(1, progress / 0.25));
-  const dotGlowFade = easeOutCubic(Math.min(1, progress / 0.08)); // fast initial glow
+  // --- Dot at top-center (always visible, fades out as circle expands) ---
+  const dotFade = 1 - easeInOutCubic(Math.min(1, progress / 0.12));
 
-  if (dotGlowFade > 0) {
-    const dotR = 4 + (1 - dotFade) * 0; // 4px dot
-    const glowR = 60 * dotGlowFade;
+  if (dotFade > 0.01) {
+    const dotR = 4;
+    const glowR = 50;
 
-    const glow = ctx.createRadialGradient(cx, cy, 0, cx, cy, glowR);
-    glow.addColorStop(0, `rgba(${cr},${cg},${cb},${dotGlowFade * 0.25})`);
-    glow.addColorStop(0.5, `rgba(${cr},${cg},${cb},${dotGlowFade * 0.08})`);
+    const glow = ctx.createRadialGradient(dotX, dotY, 0, dotX, dotY, glowR);
+    glow.addColorStop(0, `rgba(${cr},${cg},${cb},${dotFade * 0.35})`);
+    glow.addColorStop(0.5, `rgba(${cr},${cg},${cb},${dotFade * 0.08})`);
     glow.addColorStop(1, `rgba(${cr},${cg},${cb},0)`);
     ctx.fillStyle = glow;
     ctx.beginPath();
-    ctx.arc(cx, cy, glowR, 0, Math.PI * 2);
+    ctx.arc(dotX, dotY, glowR, 0, Math.PI * 2);
     ctx.fill();
 
-    // Dot core
-    const dotAlpha = dotFade * dotGlowFade;
-    if (dotAlpha > 0.01) {
-      ctx.fillStyle = `rgba(${cr},${cg},${cb},${dotAlpha})`;
-      ctx.beginPath();
-      ctx.arc(cx, cy, dotR, 0, Math.PI * 2);
-      ctx.fill();
-    }
+    ctx.fillStyle = `rgba(${cr},${cg},${cb},${dotFade * 0.9})`;
+    ctx.beginPath();
+    ctx.arc(dotX, dotY, dotR, 0, Math.PI * 2);
+    ctx.fill();
   }
 };

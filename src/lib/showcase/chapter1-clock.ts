@@ -85,9 +85,9 @@ export const renderClock: ChapterRenderer = (ctx, w, h, progress, time) => {
     }
   }
 
-  const speedMult = 1 + progress * progress * 60;
+  const speedMult = 1 + progress * progress * 4;
 
-  const hourAngle = time * 0.05 * speedMult - Math.PI / 2;
+  const hourAngle = time * 0.008 * speedMult - Math.PI / 2;
   ctx.strokeStyle = `rgba(30, 41, 59, ${alpha * 0.75})`;
   ctx.lineWidth = 3;
   ctx.lineCap = "round";
@@ -96,7 +96,7 @@ export const renderClock: ChapterRenderer = (ctx, w, h, progress, time) => {
   ctx.lineTo(cx + Math.cos(hourAngle) * currentRadius * 0.48, cy + Math.sin(hourAngle) * currentRadius * 0.48);
   ctx.stroke();
 
-  const minuteAngle = time * 0.6 * speedMult - Math.PI / 2;
+  const minuteAngle = time * 0.09 * speedMult - Math.PI / 2;
   ctx.strokeStyle = `rgba(30, 41, 59, ${alpha * 0.65})`;
   ctx.lineWidth = 2;
   ctx.beginPath();
@@ -104,7 +104,7 @@ export const renderClock: ChapterRenderer = (ctx, w, h, progress, time) => {
   ctx.lineTo(cx + Math.cos(minuteAngle) * currentRadius * 0.68, cy + Math.sin(minuteAngle) * currentRadius * 0.68);
   ctx.stroke();
 
-  const secondAngle = time * 6 * speedMult - Math.PI / 2;
+  const secondAngle = time * 0.9 * speedMult - Math.PI / 2;
   ctx.strokeStyle = `rgba(220, 38, 38, ${alpha * 0.5})`;
   ctx.lineWidth = 1;
   ctx.beginPath();
