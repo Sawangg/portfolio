@@ -1,6 +1,10 @@
+---
+import NoiseText from "./NoiseText.astro";
+---
+
 <section>
   <div class="flex items-start justify-center min-h-screen pt-[28vh] px-6">
-      <div class="text-center">
+    <div class="text-center">
       <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-zinc-900 leading-tight">
         <span class="flex justify-center gap-x-[0.3em] overflow-hidden whitespace-nowrap">
           <span class="hero-word opacity-0">The</span>
@@ -9,7 +13,7 @@
         <span class="flex justify-center gap-x-[0.3em] overflow-hidden whitespace-nowrap">
           <span class="hero-word opacity-0">behind</span>
           <span class="hero-word opacity-0">your</span>
-          <span class="hero-word opacity-0">uptime.</span>
+          <NoiseText text="uptime." class="hero-word opacity-0" />
         </span>
       </h1>
       <p id="hero-subtitle" class="opacity-0 mt-6 text-lg sm:text-xl text-zinc-400 max-w-xl mx-auto">
@@ -20,13 +24,13 @@
 </section>
 
 <script>
+  const WORD_STAGGER_MS = 80;
+  const WORD_DURATION_MS = 550;
+  const SUBTITLE_GAP_MS = 120;
+  const SUBTITLE_DURATION_MS = 600;
+
   const words = document.querySelectorAll<HTMLElement>(".hero-word");
   const subtitle = document.getElementById("hero-subtitle");
-
-  const WORD_DURATION_MS = 550;
-  const WORD_STAGGER_MS  = 80;
-  const SUBTITLE_GAP_MS  = 120;
-  const SUBTITLE_DURATION_MS = 600;
 
   words.forEach((word) => {
     word.style.transform = "translateY(100%)";
