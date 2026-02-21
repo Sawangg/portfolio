@@ -1,40 +1,24 @@
-import { defineMiddleware, sequence } from "astro:middleware";
+import { defineMiddleware } from "astro:middleware";
 
-const securityHeadersMiddleware = defineMiddleware(async (_, next) => {
+const SECURITY_HEADERS = {
+  "Access-Control-Allow-Origin": "https://muak.dev",
+  "Cross-Origin-Embedder-Policy": "require-corp",
+  "Cross-Origin-Opener-Policy": "same-origin",
+  "Cross-Origin-Resource-Policy": "same-origin",
+  "Permissions-Policy":
+    "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
+  "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload",
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "SAMEORIGIN",
+};
+
+export const onRequest = defineMiddleware(async (_context, next) => {
   const response = await next();
-  if (response.headers.get("content-type") !== "text/html") return response;
 
-  // NOTE: The nonce should not be created and replaced here, it defeats the purpose of the CSP.
-  const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
-  const cspHeader = `
-    default-src 'none';
-    script-src 'strict-dynamic' 'nonce-${nonce}';
-    style-src 'self' 'unsafe-inline';
-    img-src 'self' https: blob: data:;
-    frame-src 'self';
-    font-src 'self';
-    connect-src 'self';
-    base-uri 'none';
-    form-action 'self';
-    frame-ancestors 'self';
-    upgrade-insecure-requests;
-  `;
-  const body = (await response.text()).replaceAll("<script", `<script nonce="${nonce}"`);
+  for (const [header, value] of Object.entries(SECURITY_HEADERS)) {
+    response.headers.set(header, value);
+  }
 
-  response.headers.set("Access-Control-Allow-Origin", import.meta.env.PROD ? import.meta.env.SITE : "*");
-  response.headers.set("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
-  response.headers.set("X-Frame-Options", "SAMEORIGIN");
-  response.headers.set(
-    "Permissions-Policy",
-    "accelerometer=(), autoplay=(self), camera=(), cross-origin-isolated=(), display-capture=(), encrypted-media=(), fullscreen=(self), geolocation=(), gyroscope=(), keyboard-map=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(self), publickey-credentials-get=(), screen-wake-lock=(), sync-xhr=(), usb=(), xr-spatial-tracking=()",
-  );
-  response.headers.set("Cross-Origin-Embedder-Policy", "require-corp");
-  response.headers.set("Cross-Origin-Opener-Policy", "same-origin");
-  response.headers.set("Cross-Origin-Resource-Policy", "same-origin");
-  response.headers.set("Content-Security-Policy", cspHeader.replace(/\s{2,}/g, " ").trim());
-  response.headers.set("X-Nonce", nonce);
-
-  return new Response(body, response);
+  return response;
 });
-
-export const onRequest = sequence(securityHeadersMiddleware);

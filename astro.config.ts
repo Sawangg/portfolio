@@ -1,58 +1,65 @@
-import cloudflare from "@astrojs/cloudflare";
+// import cloudflare from "@astrojs/cloudflare";
 import sitemap from "@astrojs/sitemap";
-import playformCompress from "@playform/compress";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, fontProviders, passthroughImageService } from "astro/config";
-import robotsTxt from "astro-robots-txt";
 
 export default defineConfig({
-  adapter: cloudflare(),
-  devToolbar: {
-    enabled: false,
-  },
-  experimental: {
-    clientPrerender: true,
-    fonts: [
-      {
-        cssVariable: "--font-aktiv-grotesk",
-        fallbacks: [
-          "ui-sans-serif",
-          "system-ui",
-          "sans-serif",
-          "Apple Color Emoji",
-          "Segoe UI Emoji",
-          "Segoe UI Symbol",
-          "Noto Color Emoji",
-        ],
-        name: "Aktiv Grotesk",
-        provider: "local",
+  // adapter: cloudflare(),
+  fonts: [
+    {
+      cssVariable: "--font-univers-next",
+      fallbacks: [
+        "ui-sans-serif",
+        "system-ui",
+        "sans-serif",
+        "Apple Color Emoji",
+        "Segoe UI Emoji",
+        "Segoe UI Symbol",
+        "Noto Color Emoji",
+      ],
+      name: "Univers Next",
+      options: {
         variants: [
           {
-            src: ["./src/assets/fonts/aktivgrotesk.woff2"],
+            src: ["./src/assets/fonts/Univers Next Pro UltraLight.woff2"],
             style: "normal",
-            weight: "100 800",
+            weight: 100,
+          },
+          {
+            src: ["./src/assets/fonts/Univers Next Pro Thin.woff2"],
+            style: "normal",
+            weight: 200,
+          },
+          {
+            src: ["./src/assets/fonts/Univers Next Pro Regular.woff2"],
+            style: "normal",
+            weight: 400,
+          },
+          {
+            src: ["./src/assets/fonts/Univers Next Pro Medium.woff2"],
+            style: "normal",
+            weight: 500,
+          },
+          {
+            src: ["./src/assets/fonts/Univers Next Pro Bold.woff2"],
+            style: "normal",
+            weight: 700,
+          },
+          {
+            src: ["./src/assets/fonts/Univers Next Pro Heavy.woff2"],
+            style: "normal",
+            weight: 800,
+          },
+          {
+            src: ["./src/assets/fonts/Univers Next Pro Black.woff2"],
+            style: "normal",
+            weight: 900,
           },
         ],
       },
-      {
-        cssVariable: "--font-fira-code",
-        fallbacks: [
-          "ui-monospace",
-          "SFMono-Regular",
-          "Menlo",
-          "Monaco",
-          "Consolas",
-          "Liberation Mono",
-          "Courier New",
-          "monospace",
-        ],
-        name: "Fira Code",
-        provider: fontProviders.google(),
-      },
-    ],
-    preserveScriptOrder: true,
-    staticImportMetaEnv: true,
-  },
+      provider: fontProviders.local(),
+    },
+  ],
   image: {
     remotePatterns: [
       {
@@ -61,11 +68,33 @@ export default defineConfig({
     ],
     service: passthroughImageService(),
   },
-  integrations: [playformCompress(), robotsTxt(), sitemap({ namespaces: { video: false } })],
-  output: "server",
+  integrations: [sitemap({ namespaces: { video: false } })],
+  output: "static",
   prefetch: {
     defaultStrategy: "viewport",
     prefetchAll: true,
+  },
+  security: {
+    csp: {
+      directives: [
+        "default-src 'none'",
+        "img-src 'self' https: blob: data:",
+        "media-src 'self' https: blob: data:",
+        "frame-src 'self'",
+        "font-src 'self'",
+        "connect-src 'self'",
+        "base-uri 'none'",
+        "form-action 'self'",
+        "upgrade-insecure-requests",
+      ],
+      scriptDirective: {
+        resources: ["'self'"],
+        strictDynamic: true,
+      },
+      styleDirective: {
+        resources: ["'self'"],
+      },
+    },
   },
   site: "https://leomercier.dev",
   vite: {

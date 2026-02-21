@@ -1,63 +1,9 @@
 ---
-import Background from "@components/Background.astro";
-import BaseLayout from "@components/BaseLayout.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
 ---
 
 <BaseLayout>
-  <main class="flex flex-col px-6 gap-y-5 mt-10 mx-auto max-w-2xl text-[1.1rem]/7 md:px-0">
-    <h1 class="mb-3 font-semibold text-black dark:text-white text-4xl">Léo Mercier</h1>
-    <p>
-      Hey, I'm Léo Mercier, a
-      <span class="bg-linear-to-r from-purple-400 to-red-500 bg-clip-text text-transparent">creative</span>
-      engineer, open-source fanatic and privacy advocate.
-    </p>
-
-    <p>
-      Working at&nbsp;
-      <a class="inline-flex items-center gap-x-1.5 rounded-md px-1.5 py-0.5 font-medium text-sm/5 forced-colors:outline bg-green-400/25 text-green-700 group-data-[hovered]:bg-green-400/30 dark:bg-green-400/10 dark:text-green-300 dark:group-data-[hovered]:bg-green-400/15" href="https://www.ca-cib.com/" target="_blank">CACIB</a>
-      <br />
-      Creator of&nbsp;
-      <a class="inline-flex items-center gap-x-1.5 rounded-md px-1.5 py-0.5 font-medium text-sm/5 forced-colors:outline bg-zinc-400/20 text-zinc-700 group-data-hovered:bg-zinc-400/30 dark:bg-zinc-400/15 dark:text-zinc-400 dark:group-data-hovered:bg-zinc-400/15" href="https://github.com/Sawangg/HeraUI/" target="_blank">HeraUI</a>
-    </p>
-
-    <p>I’m passionate about turning my crazy ideas into reality. You can find my full <a class="text-black underline underline-offset-3 decoration-black/30 hover:decoration-black dark:text-white dark:decoration-white/40 dark:hover:decoration-white" href="/projects">projects list here</a>.</p>
-    <p>I write <a class="text-black underline underline-offset-3 decoration-black/30 hover:decoration-black dark:text-white dark:decoration-white/40 dark:hover:decoration-white" href="https://blog.leomercier.dev/" target="_blank">blog</a>
-      posts about open-source, devops, privacy and more. Occasionally, I also do some coding live streams on Twitch.</p>
-    <p>Outside of programming, I enjoy fitness and reading a good book. Right now I live in the City of Lights, Paris 🇫🇷. If you are around, feel free to reach out, we could have a chat or work together.</p>
-    <hr class="my-2 w-1/3 self-center text-black/20 dark:text-white/30" />
-    <p>Find me on <span>GitHub</span> or email me <span class="font-mono text-base">hi@leomercier.dev</span></p>
-    <hr class="my-2 w-1/3 self-center text-black/20 dark:text-white/30" />
-    <p>If you ever found my content useful, feel free to donate to help me deliver more content. Thank you!</p>
+  <main>
+    <p>Hello world!</p>
   </main>
-  <Background />
 </BaseLayout>
-
-<style>
-  @media (prefers-reduced-motion: no-preference) {
-    main > *:not(h1) {
-      --stagger-delay: 100ms;
-      opacity: 0;
-      transform: translateY(12px);
-      animation: slide-in 500ms forwards;
-      animation-delay: calc(var(--stagger-delay) * (var(--enter-index, 0)));
-    }
-
-    main > *:nth-child(2)  { --enter-index: 0; }
-    main > *:nth-child(3)  { --enter-index: 1; }
-    main > *:nth-child(4)  { --enter-index: 2; }
-    main > *:nth-child(5)  { --enter-index: 3; }
-    main > *:nth-child(6)  { --enter-index: 4; }
-    main > *:nth-child(7)  { --enter-index: 5; }
-    main > *:nth-child(8)  { --enter-index: 6; }
-    main > *:nth-child(9)  { --enter-index: 7; }
-    main > *:nth-child(10) { --enter-index: 8; }
-  }
-
-  @keyframes slide-in {
-    to {
-      opacity: 1;
-      transform: none;
-    }
-  }
-</style>
-

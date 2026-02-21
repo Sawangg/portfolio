@@ -1,13 +1,11 @@
 ---
 import { Font } from "astro:assets";
 import Footer from "@components/Footer.astro";
-import Header from "@components/Header.astro";
-import ThemeManager from "@components/ThemeManager.astro";
 
 const { title, description } = Astro.props;
 ---
 
-<html lang="en" data-theme="auto">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -17,6 +15,7 @@ const { title, description } = Astro.props;
       property="og:description"
       content={description ?? "The 2025 portfolio of Léo Mercier."}
     />
+
     <meta name="author" content="Léo Mercier" />
     <meta name="copyright" content="CC BY-NC-SA" />
 
@@ -26,8 +25,7 @@ const { title, description } = Astro.props;
 
     <link rel="preconnect" href="/" />
 
-    <Font cssVariable="--font-aktiv-grotesk" preload />
-    <Font cssVariable="--font-fira-code" preload />
+    <Font cssVariable="--font-univers-next" preload />
 
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -37,7 +35,7 @@ const { title, description } = Astro.props;
 
     <meta name="color-scheme" content="light dark">
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="white" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="black" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="white" />
 
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
     <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" />
@@ -46,14 +44,9 @@ const { title, description } = Astro.props;
     <meta property="og:title" content={title ?? "Léo Mercier's portfolio"} />
     <meta property="og:type" content="website" />
 
-    <link rel="alternate" type="application/rss+xml" title="Léo Mercier's blog" href={`${Astro.site}rss.xml`} />
-
-    <title>{title ?? "Léo Mercier — 2025"}</title>
-
-    <ThemeManager />
+    <title>{title ?? "Léo Mercier — 2026"}</title>
   </head>
-  <body class="scheme-light antialiased min-h-screen overflow-x-hidden font-sans bg-white text-zinc-500 transition-colors ease-in-out duration-300 **:outline-none **:focus:ring-2 **:focus:ring-sky-500 selection:bg-sky-500 selection:text-white dark:bg-black dark:text-[#bbb] dark:scheme-dark">
-    <Header />
+  <body class="scheme-light antialiased min-h-screen overflow-x-hidden scroll-smooth font-sans bg-white text-zinc-500 transition-colors ease-in-out duration-300 **:outline-none **:focus:ring-2 **:focus:ring-sky-500 selection:bg-sky-500 selection:text-white">
     <slot />
     <Footer />
   </body>
@@ -62,11 +55,9 @@ const { title, description } = Astro.props;
 <style is:global>
   @import "tailwindcss";
 
-  @variant dark (&:is([data-theme="dark"] *));
-
   @theme inline {
-    --font-sans: var(--font-aktiv-grotesk);
-    --font-mono: var(--font-fira-code);
+    --font-sans: var(--font-univers-next);
   }
 </style>
+
 

@@ -1,0 +1,10 @@
+{
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  },
+  "compatibility_date": "2026-02-14",
+  "compatibility_flags": ["nodejs_compat"],
+  "name": "portfolio",
+  "send_metrics": false
+}
