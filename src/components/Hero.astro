@@ -16,9 +16,6 @@ import NoiseText from "./NoiseText.astro";
           <NoiseText text="uptime." class="hero-word opacity-0" />
         </span>
       </h1>
-      <p id="hero-subtitle" class="opacity-0 mt-6 text-lg sm:text-xl text-zinc-400 max-w-xl mx-auto">
-        Site Reliability Engineer & DevOps
-      </p>
     </div>
   </div>
 </section>
@@ -26,11 +23,8 @@ import NoiseText from "./NoiseText.astro";
 <script>
   const WORD_STAGGER_MS = 80;
   const WORD_DURATION_MS = 550;
-  const SUBTITLE_GAP_MS = 120;
-  const SUBTITLE_DURATION_MS = 600;
 
   const words = document.querySelectorAll<HTMLElement>(".hero-word");
-  const subtitle = document.getElementById("hero-subtitle");
 
   words.forEach((word) => {
     word.style.transform = "translateY(100%)";
@@ -44,12 +38,6 @@ import NoiseText from "./NoiseText.astro";
         word.style.transform = "translateY(-10%)";
         word.style.opacity = "1";
       });
-
-      if (subtitle) {
-        const delay = words.length * WORD_STAGGER_MS + SUBTITLE_GAP_MS;
-        subtitle.style.transition = `opacity ${SUBTITLE_DURATION_MS}ms ease ${delay}ms`;
-        subtitle.style.opacity = "1";
-      }
     });
   });
 </script>
