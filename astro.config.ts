@@ -1,10 +1,8 @@
-// import cloudflare from "@astrojs/cloudflare";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, fontProviders, passthroughImageService } from "astro/config";
 
 export default defineConfig({
-  // adapter: cloudflare(),
   fonts: [
     {
       cssVariable: "--font-univers-next",
@@ -89,9 +87,9 @@ export default defineConfig({
       ],
       scriptDirective: {
         resources: ["'self'"],
-        strictDynamic: true,
       },
       styleDirective: {
+        hashes: ["sha256-YMy32fu6BgZwLZ0D2AwjwfLGsXKWdTadx3ge09aU/RQ="],
         resources: ["'self'"],
       },
     },

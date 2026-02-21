@@ -1,0 +1,42 @@
+---
+import Signature from "@assets/icons/signature.svg";
+import Briefcase from "@assets/icons/briefcase.svg";
+import PencilSquare from "@assets/icons/pencil-square.svg";
+import Envelope from "@assets/icons/envelope.svg";
+
+const linkClass = "text-zinc-900 hover:text-zinc-900 transition-colors duration-200";
+---
+
+<nav class="absolute top-0 left-0 right-0 z-50" role="navigation" aria-label="Main">
+  <div class="mx-auto max-w-7xl flex items-center gap-8 px-8 md:px-16 py-7">
+    <a href="/" aria-label="Home" class={`shrink-0 text-zinc-900 hover:text-zinc-500 transition-colors duration-300`}>
+      <Signature class="h-8 w-auto" />
+    </a>
+
+    <hr class="hidden md:block flex-1 border-t border-zinc-300" />
+
+    <ul class="hidden md:flex items-center gap-10">
+      <li><a href="#work" class={`text-sm tracking-widest uppercase ${linkClass}`}>Work</a></li>
+      <li><a href="https://blog.leomercier.dev" target="_blank" rel="noopener noreferrer" class={`text-sm tracking-widest uppercase ${linkClass}`}>Blog</a></li>
+      <li><a href="mailto:hi@leomercier.dev" class={`text-sm tracking-widest uppercase ${linkClass}`}>Contact</a></li>
+    </ul>
+
+    <ul class="flex md:hidden items-center gap-6 ml-auto">
+      <li>
+        <a href="#work" aria-label="Work" class={linkClass}>
+          <Briefcase class="size-5" />
+        </a>
+      </li>
+      <li>
+        <a href="https://blog.leomercier.dev" target="_blank" rel="noopener noreferrer" aria-label="Blog" class={linkClass}>
+          <PencilSquare class="size-5" />
+        </a>
+      </li>
+      <li>
+        <a href="mailto:hi@leomercier.dev" aria-label="Contact" class={linkClass}>
+          <Envelope class="size-5" />
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

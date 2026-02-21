@@ -12,11 +12,14 @@
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
       "@layouts/*": ["src/layouts/*"],
+      "@lib/*": ["src/lib/*"],
       "@pages/*": ["src/pages/*"],
       "@ui/*": ["src/ui/*"]
     },
     // Type Checking
-    "useUnknownInCatchVariables": true
+    "useUnknownInCatchVariables": true,
+    // Interop Constraints
+    "verbatimModuleSyntax": true
   },
   "exclude": ["dist", "node_modules"],
   "extends": "astro/tsconfigs/strictest",

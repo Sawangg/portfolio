@@ -1,9 +1,18 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
+import Nav from "@components/Nav.astro";
+import Hero from "@components/Hero.astro";
+import Showcase from "@components/Showcase.astro";
+import ProjectsSection from "@components/ProjectsSection.astro";
+import ContactSection from "@components/ContactSection.astro";
 ---
 
 <BaseLayout>
+  <Nav />
   <main>
-    <p>Hello world!</p>
+    <Hero />
+    <Showcase />
+    <ProjectsSection />
+    <ContactSection />
   </main>
 </BaseLayout>

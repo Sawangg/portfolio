@@ -1,0 +1,72 @@
+<section class="py-32 px-6" id="work">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-sm tracking-widest uppercase text-zinc-400 mb-16">Selected Work</h2>
+    <div class="grid gap-12 md:grid-cols-2">
+      <article class="project-card group">
+        <div class="aspect-video bg-zinc-100 rounded-xl mb-6 flex items-center justify-center overflow-hidden">
+          <div class="text-zinc-300 text-6xl font-bold select-none group-hover:scale-105 transition-transform duration-500">01</div>
+        </div>
+        <span class="text-xs tracking-widest uppercase text-zinc-400">Kubernetes &middot; Terraform</span>
+        <h3 class="text-xl font-semibold text-zinc-900 mt-2">Cloud Infrastructure Platform</h3>
+        <p class="text-zinc-500 mt-2 leading-relaxed">
+          Designed and deployed a multi-region Kubernetes platform serving millions of requests with 99.99% uptime.
+        </p>
+      </article>
+      <article class="project-card group">
+        <div class="aspect-video bg-zinc-100 rounded-xl mb-6 flex items-center justify-center overflow-hidden">
+          <div class="text-zinc-300 text-6xl font-bold select-none group-hover:scale-105 transition-transform duration-500">02</div>
+        </div>
+        <span class="text-xs tracking-widest uppercase text-zinc-400">Prometheus &middot; Grafana</span>
+        <h3 class="text-xl font-semibold text-zinc-900 mt-2">Observability Stack</h3>
+        <p class="text-zinc-500 mt-2 leading-relaxed">
+          Built a full observability pipeline with custom dashboards, alerting, and distributed tracing across microservices.
+        </p>
+      </article>
+      <article class="project-card group">
+        <div class="aspect-video bg-zinc-100 rounded-xl mb-6 flex items-center justify-center overflow-hidden">
+          <div class="text-zinc-300 text-6xl font-bold select-none group-hover:scale-105 transition-transform duration-500">03</div>
+        </div>
+        <span class="text-xs tracking-widest uppercase text-zinc-400">GitHub Actions &middot; ArgoCD</span>
+        <h3 class="text-xl font-semibold text-zinc-900 mt-2">CI/CD Pipeline Overhaul</h3>
+        <p class="text-zinc-500 mt-2 leading-relaxed">
+          Migrated legacy deployment workflows to GitOps with ArgoCD, reducing deploy times from hours to minutes.
+        </p>
+      </article>
+      <article class="project-card group">
+        <div class="aspect-video bg-zinc-100 rounded-xl mb-6 flex items-center justify-center overflow-hidden">
+          <div class="text-zinc-300 text-6xl font-bold select-none group-hover:scale-105 transition-transform duration-500">04</div>
+        </div>
+        <span class="text-xs tracking-widest uppercase text-zinc-400">Ansible &middot; Packer</span>
+        <h3 class="text-xl font-semibold text-zinc-900 mt-2">Infrastructure Automation</h3>
+        <p class="text-zinc-500 mt-2 leading-relaxed">
+          Automated provisioning of 200+ servers with immutable infrastructure patterns, cutting incident recovery to under 5 minutes.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script>
+  const cards = document.querySelectorAll(".project-card");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          (entry.target as HTMLElement).style.opacity = "1";
+          (entry.target as HTMLElement).style.transform = "translateY(0)";
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -60px 0px" },
+  );
+
+  cards.forEach((card, i) => {
+    const el = card as HTMLElement;
+    el.style.opacity = "0";
+    el.style.transform = "translateY(40px)";
+    el.style.transition = `opacity 0.7s ease ${i * 0.1}s, transform 0.7s ease ${i * 0.1}s`;
+    observer.observe(el);
+  });
+</script>
