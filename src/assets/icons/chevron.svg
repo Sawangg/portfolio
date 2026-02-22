@@ -1,3 +1,35 @@
 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+  <path id="chevron-path" stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+  <style>
+    @media (prefers-reduced-motion) {
+      #chevron-path {
+        animation: none !important;
+        stroke-dasharray: unset !important;
+      }
+    }
+    @keyframes chevron-draw {
+      0% {
+        stroke-dashoffset: 1px;
+        stroke-dasharray: 0 25px;
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      20% {
+        stroke-dasharray: 25px 0;
+      }
+      80% {
+        stroke-dasharray: 25px 0;
+      }
+      90%, to {
+        stroke-dasharray: 0 25px;
+      }
+    }
+    #chevron-path {
+      stroke-dashoffset: 1px;
+      stroke-dasharray: 25px 0;
+      animation: chevron-draw 4s ease forwards infinite;
+    }
+  </style>
 </svg>
