@@ -8,9 +8,9 @@ const { text, class: className } = Astro.props;
 ---
 
 <span class:list={["noise-text-word relative inline-block isolate", className]} data-text={text}>
-  <span class="noise-text-bg absolute bg-white pointer-events-none"></span>
+  <span class="noise-text-bg absolute bg-white pointer-events-none top-(--nt-top) left-(--nt-left) w-(--nt-width) h-(--nt-height)"></span>
   <span class="noise-text-content relative text-black z-1">{text}</span>
-  <span class="noise-text-canvas-wrap absolute mix-blend-screen z-2 pointer-events-none">
+  <span class="noise-text-canvas-wrap absolute mix-blend-screen z-2 pointer-events-none top-(--nt-top) left-(--nt-left) w-(--nt-width) h-(--nt-height)">
     <canvas aria-hidden="true" class="block w-full h-full"></canvas>
   </span>
 </span>
@@ -61,9 +61,14 @@ const { text, class: className } = Astro.props;
       const width = textRect.width;
       const height = textRect.height;
 
-      const style = `top:${top}px;left:${left}px;width:${width}px;height:${height}px;`;
-      bg.setAttribute("style", style);
-      canvasWrap.setAttribute("style", style);
+      bg.style.setProperty("--nt-top", `${top}px`);
+      bg.style.setProperty("--nt-left", `${left}px`);
+      bg.style.setProperty("--nt-width", `${width}px`);
+      bg.style.setProperty("--nt-height", `${height}px`);
+      canvasWrap.style.setProperty("--nt-top", `${top}px`);
+      canvasWrap.style.setProperty("--nt-left", `${left}px`);
+      canvasWrap.style.setProperty("--nt-width", `${width}px`);
+      canvasWrap.style.setProperty("--nt-height", `${height}px`);
 
       canvas.width = width;
       canvas.height = height;
@@ -111,3 +116,4 @@ const { text, class: className } = Astro.props;
     requestAnimationFrame(render);
   });
 </script>
+
