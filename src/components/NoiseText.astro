@@ -8,9 +8,9 @@ const { text, class: className } = Astro.props;
 ---
 
 <span class:list={["noise-text-word relative inline-block isolate", className]} data-text={text}>
-  <span class="absolute -inset-1 bg-white"></span>
-  <span class="relative text-black z-1">{text}</span>
-  <span class="absolute inset-0 mix-blend-screen z-2 pointer-events-none">
+  <span class="noise-text-bg absolute bg-white pointer-events-none"></span>
+  <span class="noise-text-content relative text-black z-1">{text}</span>
+  <span class="noise-text-canvas-wrap absolute mix-blend-screen z-2 pointer-events-none">
     <canvas aria-hidden="true" class="block w-full h-full"></canvas>
   </span>
 </span>
@@ -34,15 +34,39 @@ const { text, class: className } = Astro.props;
   }
 
   document.querySelectorAll<HTMLElement>(".noise-text-word").forEach((wrapper) => {
+    const bg = wrapper.querySelector<HTMLElement>(".noise-text-bg")!;
+    const content = wrapper.querySelector<HTMLElement>(".noise-text-content")!;
+    const canvasWrap = wrapper.querySelector<HTMLElement>(".noise-text-canvas-wrap")!;
     const canvas = wrapper.querySelector("canvas")!;
     const ctx = canvas.getContext("2d")!;
 
     let startTime = 0;
 
+    function getTextRect(): DOMRect | null {
+      const textNode = content.firstChild;
+      if (!textNode || textNode.nodeType !== Node.TEXT_NODE) return null;
+      const range = document.createRange();
+      range.selectNode(textNode);
+      return range.getBoundingClientRect();
+    }
+
     function resize() {
-      const rect = wrapper.getBoundingClientRect();
-      canvas.width = rect.width;
-      canvas.height = rect.height;
+      const wrapperRect = wrapper.getBoundingClientRect();
+      const textRect = getTextRect();
+      if (!textRect || textRect.width === 0) return;
+
+      // Position relative to wrapper
+      const top = textRect.top - wrapperRect.top;
+      const left = textRect.left - wrapperRect.left;
+      const width = textRect.width;
+      const height = textRect.height;
+
+      const style = `top:${top}px;left:${left}px;width:${width}px;height:${height}px;`;
+      bg.setAttribute("style", style);
+      canvasWrap.setAttribute("style", style);
+
+      canvas.width = width;
+      canvas.height = height;
     }
 
     function render(timestamp: number) {
