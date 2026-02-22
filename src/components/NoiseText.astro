@@ -10,7 +10,7 @@ const { text, class: className } = Astro.props;
 <span class:list={["noise-text-word relative inline-block isolate", className]} data-text={text}>
   <span class="noise-text-bg absolute bg-white pointer-events-none top-(--nt-top) left-(--nt-left) w-(--nt-width) h-(--nt-height)"></span>
   <span class="noise-text-content relative text-black z-1">{text}</span>
-  <span class="noise-text-canvas-wrap absolute mix-blend-screen z-2 pointer-events-none top-(--nt-top) left-(--nt-left) w-(--nt-width) h-(--nt-height)">
+  <span class="noise-text-canvas-wrap absolute mix-blend-screen z-2 pointer-events-none top-(--nt-top) left-(--nt-left) w-(--nt-width) h-(--nt-height) overflow-hidden">
     <canvas aria-hidden="true" class="block w-full h-full"></canvas>
   </span>
 </span>
@@ -55,11 +55,12 @@ const { text, class: className } = Astro.props;
       const textRect = getTextRect();
       if (!textRect || textRect.width === 0) return;
 
-      // Position relative to wrapper
-      const top = textRect.top - wrapperRect.top;
-      const left = textRect.left - wrapperRect.left;
-      const width = textRect.width;
-      const height = textRect.height;
+      // Bleed to cover subpixel rendering
+      const BLEED = 4;
+      const top = textRect.top - wrapperRect.top - BLEED;
+      const left = textRect.left - wrapperRect.left - BLEED;
+      const width = textRect.width + BLEED * 2;
+      const height = textRect.height + BLEED * 2;
 
       bg.style.setProperty("--nt-top", `${top}px`);
       bg.style.setProperty("--nt-left", `${left}px`);
