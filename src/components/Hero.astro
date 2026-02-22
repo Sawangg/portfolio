@@ -1,11 +1,12 @@
 ---
 import NoiseText from "./NoiseText.astro";
+import Chevron from "@assets/icons/chevron.svg";
 ---
 
 <section>
-  <div class="flex items-start justify-center min-h-screen pt-[28vh] px-6">
+  <div class="flex items-start justify-center min-h-svh pt-[28vh] px-6">
     <div class="text-center">
-      <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-zinc-900 leading-[1.1]">
+      <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-9xl font-bold tracking-tight text-zinc-900 leading-[1.1]">
         <span class="flex justify-center gap-x-[0.3em] overflow-hidden whitespace-nowrap">
           <span class="hero-word opacity-0">The</span>
           <span class="hero-word opacity-0">engineer</span>
@@ -17,6 +18,11 @@ import NoiseText from "./NoiseText.astro";
         </span>
       </h1>
     </div>
+
+    <div class="scroll-indicator absolute bottom-5 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-0 text-zinc-900">
+      <span class="text-sm tracking-widest uppercase">DIVE DOWN</span>
+      <Chevron class="size-6" />
+    </div>
   </div>
 </section>
 
@@ -25,10 +31,14 @@ import NoiseText from "./NoiseText.astro";
   const WORD_DURATION_MS = 550;
 
   const words = document.querySelectorAll<HTMLElement>(".hero-word");
+  const indicator = document.querySelector<HTMLElement>(".scroll-indicator");
 
   words.forEach((word) => {
     word.style.transform = "translateY(100%)";
   });
+
+  const wordsDelay = words.length * WORD_STAGGER_MS + WORD_DURATION_MS;
+  let introComplete = false;
 
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
@@ -38,6 +48,28 @@ import NoiseText from "./NoiseText.astro";
         word.style.transform = "translateY(-10%)";
         word.style.opacity = "1";
       });
+
+      if (indicator) {
+        setTimeout(() => {
+          introComplete = true;
+          indicator.style.transition = "opacity 400ms ease";
+          indicator.style.opacity = window.scrollY < 80 ? "1" : "0";
+        }, wordsDelay + 200);
+      }
     });
   });
+
+  if (indicator) {
+    let ticking = false;
+    window.addEventListener("scroll", () => {
+      if (!introComplete) return;
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(() => {
+          indicator.style.opacity = window.scrollY < 80 ? "1" : "0";
+          ticking = false;
+        });
+      }
+    }, { passive: true });
+  }
 </script>
