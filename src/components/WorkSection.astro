@@ -1,0 +1,74 @@
+<section class="py-32 px-6" id="work">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-4xl sm:text-5xl font-bold tracking-tight text-zinc-900 mb-20">Recent work</h2>
+
+    <div class="space-y-16">
+
+      <work-entry class="block">
+        <div class="mb-1">
+          <h3 class="text-xl font-bold text-zinc-900">Crédit Agricole CIB</h3>
+          <p class="text-sm text-zinc-400">Nov 2024 – Present</p>
+        </div>
+        <hr class="border-zinc-200 my-4" />
+        <p class="font-semibold text-zinc-800 mb-2">Site Reliability Engineer</p>
+        <p class="text-zinc-500 leading-relaxed max-w-2xl">
+        I architect and operate the full AWS infrastructure for the bank's regulatory department, ensuring 100% availability of critical financial applications. I built end-to-end CI/CD pipelines and Kubernetes automation that cut deployment times by two third, and mentor incoming DevOps engineers on infrastructure and on-call practices.
+        </p>
+      </work-entry>
+
+      <div class="grid gap-16 md:grid-cols-2">
+
+        <work-entry class="block">
+          <div class="mb-1">
+            <h3 class="text-xl font-bold text-zinc-900">BPCE</h3>
+            <p class="text-sm text-zinc-400">Mar 2022 – Nov 2024</p>
+          </div>
+          <hr class="border-zinc-200 my-4" />
+          <p class="font-semibold text-zinc-800 mb-2">Software Engineer</p>
+          <p class="text-zinc-500 leading-relaxed">
+            I led the design and rollout of an AI coding assistant that boosted productivity for over 5,000 developers, built an on-boarding platform deployed across a dozen countries that halved ramp-up time, and maintained 99.9% uptime across all on-premise products.
+          </p>
+        </work-entry>
+
+        <work-entry class="block">
+          <div class="mb-1">
+            <h3 class="text-xl font-bold text-zinc-900">Natixis</h3>
+            <p class="text-sm text-zinc-400">Sep 2021 – Mar 2022</p>
+          </div>
+          <hr class="border-zinc-200 my-4" />
+          <p class="font-semibold text-zinc-800 mb-2">Junior Software Engineer</p>
+          <p class="text-zinc-500 leading-relaxed">
+            I built an audio recording platform that collected voice data from 10,000 employees to train in-house AI models, reduced codebase size by 50% through a shared services library, and launched a showroom site that secured three new contracts.
+          </p>
+        </work-entry>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  const entries = document.querySelectorAll("work-entry");
+
+  const observer = new IntersectionObserver(
+    (observed) => {
+      observed.forEach((entry) => {
+        if (entry.isIntersecting) {
+          (entry.target as HTMLElement).style.opacity = "1";
+          (entry.target as HTMLElement).style.transform = "translateY(0)";
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
+  );
+
+  entries.forEach((entry, i) => {
+    const el = entry as HTMLElement;
+    el.style.opacity = "0";
+    el.style.transform = "translateY(28px)";
+    el.style.transition = `opacity 0.6s ease ${i * 0.1}s, transform 0.6s ease ${i * 0.1}s`;
+    observer.observe(el);
+  });
+</script>
