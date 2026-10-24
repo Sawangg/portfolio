@@ -1,15 +1,15 @@
 {
   "dependencies": {
-    "@astrojs/check": "^0.9.9",
-    "@astrojs/sitemap": "^3.7.2",
-    "@tailwindcss/vite": "^4.2.4",
-    "astro": "^6.1.10",
-    "tailwindcss": "^4.2.4",
+    "@astrojs/check": "^0.9.12",
+    "@astrojs/sitemap": "^3.7.4",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^6.4.8",
+    "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.13",
-    "wrangler": "^4.86.0"
+    "@biomejs/biome": "^2.6.3",
+    "wrangler": "^4.152.0"
   },
   "name": "portfolio26",
   "private": true,
